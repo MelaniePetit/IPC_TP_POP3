@@ -24,7 +24,7 @@ public class Server {
 
             while(serverIsRunning) {
                 Socket clientSocket = listenSocket.accept();
-                Connexion c = new Connexion(clientSocket);
+                new Thread(new Connexion(clientSocket)).start();
             }
         }
         catch(IOException e) {
