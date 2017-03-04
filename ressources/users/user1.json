@@ -1,0 +1,30 @@
+{
+  "number_messages" : 3,
+  "messages" :
+  [
+    {
+      "from" : "a",
+      "to" : "b",
+      "subject" : "c",
+      "date" : "d",
+      "message-id" : "e",
+      "content" : "f"
+    },
+    {
+      "from" : "g",
+      "to" : "h",
+      "subject" : "i",
+      "date" : "j",
+      "message-id" : "k",
+      "content" : "l"
+    },
+    {
+      "from" : "m",
+      "to" : "n",
+      "subject" : "o",
+      "date" : "p",
+      "message-id" : "q",
+      "content" : "r"
+    }
+  ]
+}

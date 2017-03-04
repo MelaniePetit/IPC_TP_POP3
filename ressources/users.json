@@ -1,0 +1,15 @@
+{
+  "users":
+    [
+      {
+        "username" : "jeremy",
+        "password" : "123456789",
+        "file" : "user1.json"
+      },
+      {
+        "username" : "melanie",
+        "password" : "012345678",
+        "file" : "user2.json"
+      }
+    ]
+}

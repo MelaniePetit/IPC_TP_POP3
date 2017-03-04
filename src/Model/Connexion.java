@@ -1,10 +1,16 @@
 package Model;
 
+import Model.Method.Methods;
+import Model.Method.MethodsAPOP;
+import Model.Method.MethodsLIST;
+import Model.Method.MethodsSTAT;
+
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Objects;
 
-class Connexion implements Runnable {
+public class Connexion implements Runnable {
 
     //FIELD
     private BufferedReader input;
@@ -12,17 +18,24 @@ class Connexion implements Runnable {
     private Socket clientSocket;
     private int nbOfChances = 3;
     private boolean close;
+    private ArrayList<Methods> methodsList = new ArrayList<>();
+    private String userfile;
 
     //CONSTANT
-    private final String STATE_LOCK = "lock";
-    final String STATE_AUTHORIZATION = "authorization";
-//    final String STATE_TRANSACTION = "transaction";
-//    final String STATE_UPDATE = "update";
+    private final String STATE_AUTHORIZATION = "authorization";
+    private final String STATE_TRANSACTION = "transaction";
+    final String STATE_UPDATE = "update";
 
-    private String state = STATE_LOCK;
+    private String state = STATE_AUTHORIZATION;
 
     //CONSTRUCTOR
+    private void setMethodsList(){
+        methodsList.add(new MethodsAPOP(this,"APOP"));
+        methodsList.add(new MethodsLIST(this,"LIST"));
+        methodsList.add(new MethodsSTAT(this,"STAT"));
+    }
     Connexion(Socket aClientSocket){
+        setMethodsList();
         try {
             clientSocket = aClientSocket;
             input = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
@@ -34,8 +47,11 @@ class Connexion implements Runnable {
     }
 
     //GETTER & SETTER
-    void setState(String state){ this.state = state; }
-    int getNbOfChances(){ return nbOfChances; }
+    public void setState(String state){ this.state = state; }
+    public int getNbOfChances(){ return nbOfChances; }
+    public String getSTATE_TRANSACTION() {
+        return STATE_TRANSACTION;
+    }
 
     public void run(){
         try {
@@ -77,35 +93,25 @@ class Connexion implements Runnable {
     }
 
     private void answerCommand(String data){
-        String command = data.split(" ")[0];
+        String command = data.split("\\s+")[0];
         command = command.toUpperCase();
 
-        try {
-            switch (command)
+        String content = "";
+        for (String s : data.split("\\s+"))
+            content += s + " ";
+
+        for (Methods method : methodsList)
+        {
+            if(Objects.equals(method.getCommand(), command))
             {
-                case "APOP":
-                    MethodsAPOP apop = new MethodsAPOP(this);
-                    apop.answerCommand();
-                    break;
-                case "LIST":
-                    MethodsLIST list = new MethodsLIST(this);
-                    list.answerCommand();
-                    break;
-                case "STAT":
-                    MethodsSTAT stat = new MethodsSTAT(this);
-                    stat.answerCommand();
-                case "QUIT":
-                    break;
-                default:
-                    data = "UNDKNOW COMMAND";
-                    output.writeBytes(data);
+                method.answerCommand(content);
+                return;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        sendResponse("-ERR unknown command");
     }
 
-    void sendResponse(String data){
+    public void sendResponse(String data){
         data += "\n\r\n\r";
         try {
             output.writeBytes(data);
@@ -115,18 +121,30 @@ class Connexion implements Runnable {
         }
     }
 
-    boolean isStateLock(){
-        if(Objects.equals(state, STATE_LOCK))
+    public boolean isStateAuthentified(){
+        if(Objects.equals(state, STATE_AUTHORIZATION))
         {
             nbOfChances --;
             if (nbOfChances == 0)
             {
                 close = true;
-                return true;
             }
             return true;
         }
         else
             return false;
+    }
+
+    public boolean isStateTransaction()
+    {
+        return Objects.equals(state, STATE_TRANSACTION);
+    }
+
+    public void setUserFile(String file) {
+        this.userfile = file;
+    }
+
+    public String getUserfile() {
+        return userfile;
     }
 }
