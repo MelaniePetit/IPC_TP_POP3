@@ -26,10 +26,10 @@ public class MethodsAPOP extends Methods {
                 server.setState(server.getSTATE_TRANSACTION());
                 return "+OK " + login + "'s maildrop has " + nbrMsg + " messages";
             }
-            return "-ERR user not found";
+            return "-ERR " + server.getNbOfChances() + " chances left";
         }
         else
-            return "-ERR user already authenticated";
+            return "-ERR"  + server.getNbOfChances() + " chances left";
     }
 
     @Override

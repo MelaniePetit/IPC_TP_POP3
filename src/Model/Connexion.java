@@ -1,9 +1,6 @@
 package Model;
 
-import Model.Method.Methods;
-import Model.Method.MethodsAPOP;
-import Model.Method.MethodsLIST;
-import Model.Method.MethodsSTAT;
+import Model.Method.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -33,6 +30,7 @@ public class Connexion implements Runnable {
         methodsList.add(new MethodsAPOP(this,"APOP"));
         methodsList.add(new MethodsLIST(this,"LIST"));
         methodsList.add(new MethodsSTAT(this,"STAT"));
+        methodsList.add(new MethodsRETR(this,"RETR"));
     }
     Connexion(Socket aClientSocket){
         setMethodsList();
@@ -56,7 +54,7 @@ public class Connexion implements Runnable {
     public void run(){
         try {
             // an echo server
-            String data = "+OK alpha POP3 server Ready\n\t\n\t";
+            String data = "+OK alpha POP3 server Ready\n\r\n\r";
 
             System.out.println ("New connection: " + clientSocket.getPort() + ", " + clientSocket.getInetAddress());
             output.writeBytes(data); // UTF is a string encoding
