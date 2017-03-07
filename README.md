@@ -16,13 +16,13 @@ _TP Client-Serveur "Post Office Protocol 3"_
 
 ```diff
 + OK suivi d’un listing de scan
-Example:
+:memo: Example:
 + OK 2 messages (320 octets) 
 + 1 120 
 + 2 200 
 
 - ERR numéro de message invalide  
-Example: 
+:memo: Example: 
 - ERR no such message, only 2 messages in maildrop
 ```
 
@@ -38,24 +38,24 @@ Example:
 ## RETR _[num]_
 ```diff
 + OK suivi du message
-Example:
+:memo: Example:
 + OK 120 octets 
 + message
 
 - ERR numéro de message invalide
-Example: 
+:memo: Example: 
 - ERR no such message, only 2 messages in maildrop
 ```
 
 ## DELE _[num]
 ```diff
 + OK message effacé
-Example:
+:memo: Example:
 + OK message 1 deleted
 + message
 
 - ERR numéro de message invalide
-Examples: 
+:memo: Examples: 
 - ERR message 2 already deleted
 - ERR no such message, only 2 messages in maildrop
 ```
