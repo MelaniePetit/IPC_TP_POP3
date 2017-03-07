@@ -62,7 +62,7 @@ APOP _[user]_ _[password]_
 -ERR no such message, only 2 messages in maildrop
 ```
 
-##DELE _[num]
+##DELE _[num]_
 ```diff
 +OK message effacé
 -ERR numéro de message invalide
