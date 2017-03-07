@@ -2,7 +2,11 @@
 TP Client-Serveur "Post Office Protocol 3"
 
 
-QUIT____________________________________________
+#QUIT
+```diff
++ success :
+```
++OK POP3 server ready
 
 
 
