@@ -21,7 +21,7 @@ public class Connexion implements Runnable {
     //CONSTANT
     private final String STATE_AUTHORIZATION = "authorization";
     private final String STATE_TRANSACTION = "transaction";
-    final String STATE_UPDATE = "update";
+    public final String STATE_UPDATE = "update";
 
     private String state = STATE_AUTHORIZATION;
 
@@ -31,6 +31,8 @@ public class Connexion implements Runnable {
         methodsList.add(new MethodsLIST(this,"LIST"));
         methodsList.add(new MethodsSTAT(this,"STAT"));
         methodsList.add(new MethodsRETR(this,"RETR"));
+        methodsList.add(new MethodsDELE(this,"DELE"));
+        methodsList.add(new MethodsQUIT(this,"QUIT"));
     }
     Connexion(Socket aClientSocket){
         setMethodsList();
@@ -49,6 +51,10 @@ public class Connexion implements Runnable {
     public int getNbOfChances(){ return nbOfChances; }
     public String getSTATE_TRANSACTION() {
         return STATE_TRANSACTION;
+    }
+
+    public void setClose(boolean close) {
+        this.close = close;
     }
 
     public void run(){
@@ -82,7 +88,7 @@ public class Connexion implements Runnable {
             }
             if(close)
             {
-                sendResponse("-ERR number of chances attempt");
+//                sendResponse("-ERR number of chances attempt");
                 clientSocket.close();
             }
         } catch (IOException e) {

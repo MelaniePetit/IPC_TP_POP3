@@ -36,7 +36,13 @@ public class MethodsAPOP extends Methods {
     String[] extractContent(String content) {
         String login = content.split("\\s+")[1];
         this.login = login;
-        String password = content.split("\\s+")[2];
+        String password;
+        try {
+            password = content.split("\\s+")[2];
+        }
+        catch (Exception e){
+            password="";
+        }
         return new String[]{login,password};
     }
 
