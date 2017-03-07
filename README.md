@@ -48,4 +48,15 @@ Example:
 - ERR no such message, only 2 messages in maildrop
 ```
 
-DELE____________________________________________
+## DELE _[num]
+```diff
++ OK message effacé
+Example:
++ OK message 1 deleted
++ message
+
+- ERR numéro de message invalide
+Examples: 
+- ERR message 2 already deleted
+- ERR no such message, only 2 messages in maildrop
+```
