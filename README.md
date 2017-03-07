@@ -35,7 +35,7 @@ _TP Client-Serveur "Post Office Protocol 3"_
 -ERR no such message, only 2 messages in maildrop
 ```
 
- :warning: _**Warning :** un numéro de message (optionnel), qui, s’il est présent, NE peut PAS faire référence à un message marqué comme effacé_
+ :warning: _**Warning :** un numéro de message, s’il est présent, NE peut PAS faire référence à un message marqué comme effacé_
 
 APOP _[user]_ _[password]_
 ```diff
