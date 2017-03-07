@@ -1,7 +1,7 @@
 # IPC_TP_POP3
 _TP Client-Serveur "Post Office Protocol 3"_
 
-- [] Done
+- [x] Done
 ## QUIT
 ```diff
 + OK POP3 server ready
