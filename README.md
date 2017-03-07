@@ -1,17 +1,20 @@
 # IPC_TP_POP3
 _TP Client-Serveur "Post Office Protocol 3"_
 
-- [] ## QUIT
+- [] Done
+## QUIT
 ```diff
 + OK POP3 server ready
 ```
 
-- [] ## STAT
+- [] Done
+## STAT
 ```diff
 + OK id bytes
 ```
 
-- [] ## LIST _[num]_
+- [] Done
+## LIST _[num]_
 
 ```diff
 + OK suivi d’un listing de scan
@@ -32,13 +35,15 @@ _TP Client-Serveur "Post Office Protocol 3"_
  :warning: _**Warning :** un numéro de message (optionnel), qui, s’il est présent, NE peut PAS faire référence à un message marqué comme effacé_
 
 
-- [] ## APOP _[user]_ _[password]_
+- [] Done
+## APOP _[user]_ _[password]_
 ```diff
 + OK maildrop has 1 message (369 octets)
 - ERR permission refused
 ```
 
-- [] ## RETR _[num]_
+- [] Done
+## RETR _[num]_
 ```diff
 + OK suivi du message
 ```
@@ -54,7 +59,8 @@ _TP Client-Serveur "Post Office Protocol 3"_
 - ERR no such message, only 2 messages in maildrop
 ```
 
-- [] ## DELE _[num]
+- [] Done
+## DELE _[num]
 ```diff
 + OK message effacé
 ```
