@@ -16,7 +16,9 @@ _TP Client-Serveur "Post Office Protocol 3"_
 
 ```diff
 + OK suivi d’un listing de scan
-:memo: Example:
+```
+
+:memo: ```diff Example:
 + OK 2 messages (320 octets) 
 + 1 120 
 + 2 200 
