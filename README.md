@@ -3,8 +3,8 @@ _TP Client-Serveur "Post Office Protocol 3"_
 
 ## QUIT
 ```diff
-+OK POP3 server signing off
--ERR some deleted messages not removed
++OK déconnexion au serveur effectuée
+-ERR certains messages n'ont pas pu être supprimés
 ```
 :memo: _**Examples:**_
 ```diff
@@ -14,7 +14,7 @@ _TP Client-Serveur "Post Office Protocol 3"_
 
 ## STAT
 ```diff
-+OK id bytes
++OK nombre de messages, taille totale
 ```
 :memo: _**Example:**_
 ```diff
@@ -24,7 +24,7 @@ _TP Client-Serveur "Post Office Protocol 3"_
 ## LIST _[num]_
 
 ```diff
-+OK suivi d’un listing de scan
++OK nombre de message, taille totale, suivi d’un listing de scan
 -ERR numéro de message invalide  
 
 ```
@@ -39,7 +39,7 @@ _TP Client-Serveur "Post Office Protocol 3"_
 -ERR no such message, only 2 messages in maildrop
 ```
 
- :warning: _**Warning :** un numéro de message, s’il est présent, NE peut PAS faire référence à un message marqué comme effacé_
+ :warning: _**Warning :** un numéro de message, s’il existe, NE peut PAS faire référence à un message marqué comme effacé._
 
 APOP _[user]_ _[password]_
 ```diff
@@ -49,7 +49,7 @@ APOP _[user]_ _[password]_
 
 ## RETR _[num]_
 ```diff
-+OK suivi du message
++OK taille du message, suivi du message
 -ERR numéro de message invalide
 ```
 :memo: _**Success Example:**_
@@ -59,21 +59,20 @@ APOP _[user]_ _[password]_
 ```
 :memo: _**Error Example:**_
 ```diff 
--ERR no such message, only 2 messages in maildrop
+-ERR this message doen't exist
 ```
 
 ##DELE _[num]_
 ```diff
-+OK message effacé
++OK message marqué pour effacement
 -ERR numéro de message invalide
 ```
 :memo: _**Success Example:**_
 ```diff 
-+OK message 1 deleted
-+message
++OK message 1 marked
 ```
 :memo: _**Error Examples:**_
 ```diff 
--ERR message 2 already deleted
--ERR no such message, only 2 messages in maildrop
+-ERR message 2 already marked
+-ERR no such message, only 2 messages in maildro / this message doesn't exist
 ```
