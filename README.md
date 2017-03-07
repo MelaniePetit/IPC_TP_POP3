@@ -16,6 +16,10 @@ _TP Client-Serveur "Post Office Protocol 3"_
 ```diff
 +OK id bytes
 ```
+:memo: _**Example:**_
+```diff
++OK 2 320
+```
 
 ## LIST _[num]_
 
