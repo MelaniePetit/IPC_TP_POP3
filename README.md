@@ -3,7 +3,7 @@ _TP Client-Serveur "Post Office Protocol 3"_
 
 ## QUIT
 ```diff
-+ OK POP3 server ready
++ OK POP3 server signing off
 ```
 
 ## STAT
