@@ -26,8 +26,7 @@ Example:
 - ERR no such message, only 2 messages in maildrop
 ```
 
-  ### Warning : 
-  un numéro de message (optionnel), qui, s’il est présent, NE peut PAS faire référence à un message marqué comme effacé
+  _**Warning :** un numéro de message (optionnel), qui, s’il est présent, NE peut PAS faire référence à un message marqué comme effacé_
 
 
 ## APOP _[user]_ _[password]_
