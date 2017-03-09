@@ -25,7 +25,7 @@ public class MethodsLIST extends Methods {
             return messageFactory(s);
         }
         else
-            return "–ERR Permission refused ";
+            return "";
     }
 
     @Override
@@ -48,8 +48,11 @@ public class MethodsLIST extends Methods {
                 JSONObject slide = (JSONObject) message;
                 String messageId = slide.get("message-id").toString();
                 String content = (String) slide.get("content");
-                answer.add(messageId);
-                answer.add(content);
+                boolean marked = (boolean) slide.get("marked");
+                if(!marked){
+                    answer.add(messageId);
+                    answer.add(content);
+                }
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();

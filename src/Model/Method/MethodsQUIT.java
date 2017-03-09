@@ -9,6 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MethodsQUIT extends Methods {
 
@@ -23,11 +24,15 @@ public class MethodsQUIT extends Methods {
             if (checkMarked()){
                 server.setState(server.STATE_UPDATE);
                 deleteMessages();
-                server.setClose(true);
-                return "+OK alpha POP3 server signing off, " + nbMessages + " left";
             }
+            server.setClose(true);
+            String s = "+OK alpha POP3 server signing off (";
+            if (nbMessages != 0)
+                s += nbMessages + " left)";
             else
-                return "+OK alpha POP3 server signing off";
+                s += "maildrop empty)";
+
+            return s;
         }
         return null;
     }
@@ -59,8 +64,9 @@ public class MethodsQUIT extends Methods {
         return false;
     }
 
-    private void deleteMessages() {
+    private void deleteMessages(){
         JSONParser parser = new JSONParser();
+        ArrayList<JSONObject> toDeleteMessages = new ArrayList<>();
         try {
             Object obj = parser.parse(new FileReader("ressources\\users\\" + server.getUserfile()));
             JSONObject jsonObject = (JSONObject) obj;
@@ -72,16 +78,22 @@ public class MethodsQUIT extends Methods {
             {
                 JSONObject slide = (JSONObject) message;
                 if (slide.get("marked").equals(true)) {
-                    messages.remove(message);
+                    toDeleteMessages.add((JSONObject) message);
                     nbMessages --;
                     jsonObject.put("number_messages", nbMessages);
-                    try (FileWriter file = new FileWriter("ressources\\users\\" + server.getUserfile())) {
-                        file.write(jsonObject.toJSONString());
-                        System.out.println("Successfully Copied JSON Object to File...");
-                        System.out.println("\nJSON Object: " + jsonObject);
-                    }
                 }
             }
+
+            for(JSONObject message : toDeleteMessages){
+                messages.remove(message);
+            }
+
+            try (FileWriter file = new FileWriter("ressources\\users\\" + server.getUserfile())) {
+                file.write(jsonObject.toJSONString());
+                System.out.println("Successfully Copied JSON Object to File...");
+                System.out.println("\nJSON Object: " + jsonObject);
+            }
+
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }

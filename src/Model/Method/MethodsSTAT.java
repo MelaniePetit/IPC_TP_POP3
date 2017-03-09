@@ -26,7 +26,7 @@ public class MethodsSTAT extends Methods{
             return messageFactory(s);
         }
         else
-            return "–ERR Permission refused ";
+            return "";
     }
 
     @Override

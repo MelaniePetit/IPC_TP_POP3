@@ -15,6 +15,7 @@ import java.io.Writer;
  * Created by jeremy on 07/03/2017.
  */
 public class MethodsDELE extends Methods {
+
     public MethodsDELE(Connexion server, String command) {
         super(server, command);
     }
@@ -25,7 +26,7 @@ public class MethodsDELE extends Methods {
             int id = Integer.parseInt(extractContent(content)[0]);
             return markedMessage(id);
         }
-        return null;
+        return "";
     }
 
     @Override
@@ -38,7 +39,7 @@ public class MethodsDELE extends Methods {
             return "+OK message "+ id +" marked delete";
         }
         else
-            return "-ERR message doesn't exist";
+            return "-ERR no such message, invalid message number";
     }
 
     private boolean getJsonContent(int id) {

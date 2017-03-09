@@ -26,10 +26,10 @@ public class MethodsAPOP extends Methods {
                 server.setState(server.getSTATE_TRANSACTION());
                 return "+OK " + login + "'s maildrop has " + nbrMsg + " messages";
             }
-            return "-ERR " + server.getNbOfChances() + " chances left";
+            return "-ERR permission refused";
         }
         else
-            return "-ERR"  + server.getNbOfChances() + " chances left";
+            return "-ERR permission refused";
     }
 
     @Override

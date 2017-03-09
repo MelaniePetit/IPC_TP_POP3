@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class MethodsRETR extends Methods {
 
+    private String messageContent = "";
+
     public MethodsRETR(Connexion server, String command) {
         super(server, command);
     }
@@ -28,7 +30,7 @@ public class MethodsRETR extends Methods {
             return messageFactory(id);
         }
         else
-            return "-ERR";
+            return "";
     }
 
     @Override
@@ -37,18 +39,17 @@ public class MethodsRETR extends Methods {
     }
 
     private String messageFactory(int id){
-        String answer = "";
-        String message = getJsonContent(id);
-        try {
-             answer = "+OK " + message.getBytes("UTF-8").length + " bytes\n" + message;
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        if(getJsonContent(id)){
+            try {
+                return "+OK " + messageContent.getBytes("UTF-8").length + " bytes\n" + messageContent;
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
-        return answer;
+        return "-ERR no such message, invalid message number";
     }
 
-    private String getJsonContent(int id) {
-        String answer = "";
+    private boolean getJsonContent(int id) {
         JSONParser parser = new JSONParser();
         try {
 
@@ -63,15 +64,20 @@ public class MethodsRETR extends Methods {
                 int messageId = Integer.parseInt(slide.get("message-id").toString());
                 if(id == messageId)
                 {
+                    String date = (String) slide.get("date");
+                    String subject = (String) slide.get("subject");
+                    int msgId = Integer.parseInt(slide.get("message-id").toString());
+                    String from = (String) slide.get("from");
+                    String to = (String) slide.get("to");
                     String content = (String) slide.get("content");
-                    answer += content;
-                    return answer;
+                    messageContent += "From: " + from + "\n\rTo: " + to + "\n\rSubject: " + subject + "\n\rDate: " + date + "\n\rMessage-ID: " + msgId + "\n\r\n\r" + content + "\n\r.\n\r";
+                    return true;
                 }
 
             }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
-        return "-ERR message doesn't exist";
+        return false;
     }
 }
