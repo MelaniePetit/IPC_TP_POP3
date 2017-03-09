@@ -23,7 +23,8 @@ public class MethodsQUIT extends Methods {
         if (server.isStateTransaction()){
             if (checkMarked()){
                 server.setState(server.STATE_UPDATE);
-                deleteMessages();
+                if(!deleteMessages())
+                    return "-ERR some deleted messages not removed";
             }
             server.setClose(true);
             String s = "+OK alpha POP3 server signing off (";
@@ -64,7 +65,7 @@ public class MethodsQUIT extends Methods {
         return false;
     }
 
-    private void deleteMessages(){
+    private boolean deleteMessages(){
         JSONParser parser = new JSONParser();
         ArrayList<JSONObject> toDeleteMessages = new ArrayList<>();
         try {
@@ -93,9 +94,9 @@ public class MethodsQUIT extends Methods {
                 System.out.println("Successfully Copied JSON Object to File...");
                 System.out.println("\nJSON Object: " + jsonObject);
             }
-
+            return true;
         } catch (ParseException | IOException e) {
-            e.printStackTrace();
+            return false;
         }
     }
 
