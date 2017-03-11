@@ -48,7 +48,7 @@ public class Connexion implements Runnable {
 
     //GETTER & SETTER
     public void setState(String state){ this.state = state; }
-    public int getNbOfChances(){ return nbOfChances; }
+//    public int getNbOfChances(){ return nbOfChances; }
     public String getSTATE_TRANSACTION() {
         return STATE_TRANSACTION;
     }
@@ -71,9 +71,9 @@ public class Connexion implements Runnable {
                 readCommand();
         }
         catch(EOFException e) {
-            System.out.println("EOF: "+e.getMessage()); }
+            System.err.println("EOF: "+e.getMessage()); }
         catch(IOException e) {
-            System.out.println("IO: "+e.getMessage());}
+            System.err.println("IO: "+e.getMessage());}
     }
 
     private void readCommand(){

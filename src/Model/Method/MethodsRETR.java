@@ -9,11 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 
-/**
- * Created by jeremy on 06/03/2017.
- */
 public class MethodsRETR extends Methods {
 
     private String messageContent = "";

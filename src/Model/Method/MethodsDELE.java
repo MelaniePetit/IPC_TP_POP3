@@ -9,11 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
-/**
- * Created by jeremy on 07/03/2017.
- */
 public class MethodsDELE extends Methods {
 
     public MethodsDELE(Connexion server, String command) {

@@ -3,16 +3,12 @@ package Model;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
-public class Server {
+public class Server implements Runnable {
 
-    private boolean serverIsRunning = true;
-
-    public static void main (String args[])
-    {
-        Server server = new Server();
-        server.tcpConnection();
-    }
+    private boolean serverIsRunning = false;
+    private ArrayList<Connexion> connections = new ArrayList<>();
 
     private void tcpConnection()
     {
@@ -20,16 +16,50 @@ public class Server {
             int serverPort = 110;
             ServerSocket listenSocket = new ServerSocket(serverPort);
 
-            System.out.println("server start listening...");
+            System.err.println("server start listening...");
 
             while(serverIsRunning) {
                 Socket clientSocket = listenSocket.accept();
-                new Thread(new Connexion(clientSocket)).start();
+                if(serverIsRunning)
+                {
+                    Connexion connection = new Connexion(clientSocket);
+                    connections.add(connection);
+                    new Thread(connection).start();
+                }
             }
         }
         catch(IOException e) {
-            System.out.println("Listen :"+e.getMessage());}
+            System.err.println("Listen :"+e.getMessage());}
+    }
+
+    public boolean isServerIsRunning() {
+        return serverIsRunning;
+    }
+
+    public void setServerIsRunning(boolean serverIsRunning) {
+        this.serverIsRunning = serverIsRunning;
+    }
+
+    @Override
+    public void run() {
+        tcpConnection();
     }
 
 
+    private static Server server;
+
+    private Server(){}
+
+    public static synchronized Server getInstance( ) {
+        if (server == null)
+            server=new Server();
+        return server;
+    }
+
+    public void cutConnection() {
+        for(Connexion connection : connections)
+        {
+            connection.setClose(true);
+        }
+    }
 }
