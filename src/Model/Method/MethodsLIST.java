@@ -22,6 +22,7 @@ public class MethodsLIST extends Methods {
         if(server.isStateTransaction())
         {
             ArrayList<String> s = getJsonContent();
+            System.out.println("send: " + messageFactory(s));
             return messageFactory(s);
         }
         else
@@ -66,7 +67,10 @@ public class MethodsLIST extends Methods {
         try {
             for(int i = 0; i < content.size(); i++)
             {
-                answer += content.get(i) + " " + (content.get(i+1).getBytes("UTF-8")).length + "\n";
+                if(i==content.size()-1)
+                    answer += content.get(i) + " " + (content.get(i+1).getBytes("UTF-8")).length + "\n";
+                else
+                    answer += content.get(i) + " " + (content.get(i+1).getBytes("UTF-8")).length;
                 i++;
             }
         } catch (UnsupportedEncodingException e) {

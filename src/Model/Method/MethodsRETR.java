@@ -66,7 +66,7 @@ public class MethodsRETR extends Methods {
                     String from = (String) slide.get("from");
                     String to = (String) slide.get("to");
                     String content = (String) slide.get("content");
-                    messageContent += "From: " + from + "\n\rTo: " + to + "\n\rSubject: " + subject + "\n\rDate: " + date + "\n\rMessage-ID: " + msgId + "\n\r\n\r" + content + "\n\r.\n\r";
+                    messageContent += "From: " + from + "\r\nTo: " + to + "\r\nSubject: " + subject + "\r\nDate: " + date + "\r\nMessage-ID: " + msgId + "\r\n\r\n" + content + "\r\n.";
                     return true;
                 }
 

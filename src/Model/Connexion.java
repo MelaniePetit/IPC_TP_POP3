@@ -60,7 +60,7 @@ public class Connexion implements Runnable {
     public void run(){
         try {
             // an echo server
-            String data = "+OK alpha POP3 server Ready\n\r\n\r";
+            String data = "+OK alpha POP3 server Ready\r\n";
 
             System.out.println ("New connection: " + clientSocket.getPort() + ", " + clientSocket.getInetAddress());
             output.writeBytes(data); // UTF is a string encoding
@@ -81,8 +81,11 @@ public class Connexion implements Runnable {
         try {
             String command;
             while ((command = input.readLine()) != null && !close) {
-                System.out.println ("receive from : " + clientSocket.getInetAddress() + " : " + clientSocket.getPort() + ", command : " + command);
-                answerCommand(command);
+                if(!Objects.equals(command, ""))
+                {
+                    System.out.println ("receive from : " + clientSocket.getInetAddress() + " : " + clientSocket.getPort() + ", command : " + command);
+                    answerCommand(command);
+                }
                 if(close)
                     break;
             }
@@ -116,7 +119,8 @@ public class Connexion implements Runnable {
     }
 
     public void sendResponse(String data){
-        data += "\n\r\n\r";
+        data += "\r\n";
+        System.out.println("send: " + data);
         try {
             output.writeBytes(data);
             output.flush();

@@ -57,7 +57,7 @@ public class MethodsSTAT extends Methods{
     }
 
     private String messageFactory(ArrayList<String> content) {
-        return "+OK " + (content.size())+ " " + BytesSize(content) + "\n";
+        return "+OK " + (content.size())+ " " + BytesSize(content);
     }
 
     private String BytesSize(ArrayList<String> content)
