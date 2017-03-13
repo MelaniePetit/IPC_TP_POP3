@@ -12,7 +12,7 @@ public class Client {
     public Client(){
         int port = 110;
         try {
-            socket = new Socket("172.20.10.2", port);
+            socket = new Socket("127.0.0.1", port);
             // Open stream
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new DataOutputStream(socket.getOutputStream());
@@ -95,12 +95,15 @@ public class Client {
         int count = 0;
         while(true)
         {
+
             num = input.read();
             ch = (char)num;
             line += ch;
             if(ch == '\r' && (next = (char) input.read()) == '\n') {
                 line += next;
                 count++;
+                if (line.contains("-ERR"))
+                    break;
             }
             if (count == 8){
                 break;
