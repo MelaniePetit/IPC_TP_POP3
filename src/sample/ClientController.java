@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Optional;
 
 /**
  * Created by Mel on 13/03/2017.
@@ -48,7 +50,22 @@ public class ClientController{
         });
         System.setOut(ps);
         System.setErr(ps);
-        client = new Client();
+
+        openDialog();
+
+    }
+
+    private void openDialog() {
+        TextInputDialog dialog = new TextInputDialog("127.0.0.1");
+        dialog.setTitle("Ip address of server POP3");
+        dialog.setHeaderText("Fill the textfield with the ip address of the server");
+        dialog.setContentText("Ip address:");
+
+        // Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            client = new Client(result.get());
+        }
     }
 
     public void send(MouseEvent mouseEvent) {

@@ -8,11 +8,13 @@ public class Client {
     private static Socket socket;
     private static BufferedReader input;
     private static DataOutputStream output;
+    private static String ipAdress;
 
-    public Client(){
+    public Client(String ip){
         int port = 110;
+        ipAdress = ip;
         try {
-            socket = new Socket("127.0.0.1", port);
+            socket = new Socket(ipAdress, port);
             // Open stream
             input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new DataOutputStream(socket.getOutputStream());
@@ -95,7 +97,6 @@ public class Client {
         int count = 0;
         while(true)
         {
-
             num = input.read();
             ch = (char)num;
             line += ch;
