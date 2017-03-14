@@ -1,11 +1,18 @@
 package Model;
 
 import Model.Method.*;
+import Model.Utils.Md5;
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.net.Socket;
+import java.nio.charset.Charset;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
+import java.security.MessageDigest;
+import java.sql.Timestamp;
 
 public class Connexion implements Runnable {
 
@@ -24,6 +31,8 @@ public class Connexion implements Runnable {
     public final String STATE_UPDATE = "update";
 
     private String state = STATE_AUTHORIZATION;
+
+    private String timeStamp;
 
     //CONSTRUCTOR
     private void setMethodsList(){
@@ -52,21 +61,24 @@ public class Connexion implements Runnable {
     public String getSTATE_TRANSACTION() {
         return STATE_TRANSACTION;
     }
-
     public void setClose(boolean close) {
         this.close = close;
     }
 
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
     public void run(){
         try {
+            timeStamp = "<" + generateTimeStamp() + ">";
             // an echo server
-            String data = "+OK alpha POP3 server Ready\r\n";
+            String data = "+OK alpha POP3 server Ready " + timeStamp + "\r\n";
 
             System.out.println ("New connection: " + clientSocket.getPort() + ", " + clientSocket.getInetAddress());
             output.writeBytes(data); // UTF is a string encoding
             output.flush();
             System.out.println ("send: " + data);
-
             if(clientSocket.isConnected())
                 readCommand();
         }
@@ -154,5 +166,12 @@ public class Connexion implements Runnable {
 
     public String getUserfile() {
         return userfile;
+    }
+
+    public String generateTimeStamp() {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+        String domain = ManagementFactory.getRuntimeMXBean().getName().split("@")[1];
+        return pid + "." + timestamp.getTime() + "@" + domain;
     }
 }

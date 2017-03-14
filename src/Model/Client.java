@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Utils.Md5;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
@@ -49,6 +51,12 @@ public class Client {
         String command = data.split("\\s+")[0];
         command = command.toUpperCase();
         try {
+            if(Objects.equals(command,"APOP"))
+            {
+                String pass = Md5.encode(data.split("\\s+")[2]);
+                data = data.split("\\s+")[0] + " " + data.split("\\s+")[1] + " " + pass;
+            }
+
             output.writeBytes(data + "\r\n"); // UTF is a string encoding
             output.flush();
             if (Objects.equals(command, "RETR")){
@@ -56,17 +64,6 @@ public class Client {
             else{
                 readStream();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void sendRequestRetr(String data)
-    {
-        try {
-            output.writeBytes(data + "\r\n"); // UTF is a string encoding
-            output.flush();
-            readStreamRetr();
         } catch (IOException e) {
             e.printStackTrace();
         }

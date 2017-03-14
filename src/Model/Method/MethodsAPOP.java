@@ -1,6 +1,7 @@
 package Model.Method;
 
 import Model.Connexion;
+import Model.Utils.Md5;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -58,9 +59,11 @@ public class MethodsAPOP extends Methods {
                 JSONObject slide = (JSONObject) user;
                 String username = (String) slide.get("username");
                 String password = (String) slide.get("password");
+                String sPassWord = Md5.encode(password);
+
                 String file = (String) slide.get("file");
 
-                if(Objects.equals(username, contentSend[0]) && Objects.equals(password, contentSend[1]))
+                if(Objects.equals(username, contentSend[0]) && Objects.equals(sPassWord, contentSend[1]))
                 {
                     setUserFile(file);
                     setNumberOfMessages();
