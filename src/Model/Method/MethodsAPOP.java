@@ -59,7 +59,7 @@ public class MethodsAPOP extends Methods {
                 JSONObject slide = (JSONObject) user;
                 String username = (String) slide.get("username");
                 String password = (String) slide.get("password");
-                String sPassWord = Md5.encode(password);
+                String sPassWord = Md5.encode(server.getTimeStamp() + password);
 
                 String file = (String) slide.get("file");
 

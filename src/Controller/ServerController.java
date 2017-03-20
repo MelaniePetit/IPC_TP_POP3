@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import Model.Console;
 import Model.Server;

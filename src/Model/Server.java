@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Server implements Runnable {
 
-    private boolean serverIsRunning = false;
+    protected boolean serverIsRunning = false;
     private ArrayList<Connexion> connections = new ArrayList<>();
 
     private void tcpConnection()
@@ -48,7 +48,7 @@ public class Server implements Runnable {
 
     private static Server server;
 
-    private Server(){}
+    protected Server(){}
 
     public static synchronized Server getInstance( ) {
         if (server == null)

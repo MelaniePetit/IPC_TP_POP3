@@ -1,25 +1,21 @@
 package Model;
 
 import Model.Method.*;
-import Model.Utils.Md5;
 
+import javax.net.ssl.SSLSocket;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.net.Socket;
-import java.nio.charset.Charset;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
-import java.security.MessageDigest;
 import java.sql.Timestamp;
 
 public class Connexion implements Runnable {
 
     //FIELD
-    private BufferedReader input;
-    private DataOutputStream output;
-    private Socket clientSocket;
+    BufferedReader input;
+    DataOutputStream output;
+    Socket clientSocket;
     private int nbOfChances = 3;
     private boolean close;
     private ArrayList<Methods> methodsList = new ArrayList<>();
@@ -43,6 +39,7 @@ public class Connexion implements Runnable {
         methodsList.add(new MethodsDELE(this,"DELE"));
         methodsList.add(new MethodsQUIT(this,"QUIT"));
     }
+
     Connexion(Socket aClientSocket){
         setMethodsList();
         try {
@@ -54,6 +51,23 @@ public class Connexion implements Runnable {
             System.out.println("Connection: "+e.getMessage());
         }
     }
+
+    public Connexion() {
+        setMethodsList();
+    }
+
+    //
+//    Connexion(SSLSocket aClientSocket){
+//        setMethodsList();
+//        try {
+//            clientSocket = aClientSocket;
+//            input = new BufferedReader( new InputStreamReader(clientSocket.getInputStream()));
+//            output =new DataOutputStream( clientSocket.getOutputStream());
+//        }
+//        catch(IOException e) {
+//            System.out.println("Connection: "+e.getMessage());
+//        }
+//    }
 
     //GETTER & SETTER
     public void setState(String state){ this.state = state; }
@@ -172,6 +186,6 @@ public class Connexion implements Runnable {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
         String domain = ManagementFactory.getRuntimeMXBean().getName().split("@")[1];
-        return pid + "." + timestamp.getTime() + "@" + domain;
+        return pid + "." + timestamp.getTime() + "@" + "petitdolle.polytech";
     }
 }

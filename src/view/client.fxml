@@ -11,13 +11,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClientController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
@@ -28,7 +32,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnSpan="7" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <children>
                   <Label text="Client POP3" textAlignment="JUSTIFY" textFill="#3c3c3c">
                      <font>
@@ -37,9 +41,9 @@
                   </Label>
                </children>
             </VBox>
-            <TextArea fx:id="tArea_out" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="3" />
-            <TextField fx:id="tf_data" maxWidth="300.0" minWidth="300.0" onKeyPressed="#enterSend" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="btn_send" mnemonicParsing="false" onMouseClicked="#send" text="Send" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextArea fx:id="tArea_out" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnSpan="7" GridPane.rowIndex="3" GridPane.rowSpan="3" />
+            <TextField fx:id="tf_data" maxWidth="300.0" minWidth="300.0" onKeyPressed="#enterSend" prefWidth="300.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button fx:id="btn_send" mnemonicParsing="false" onMouseClicked="#send" text="Send" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
