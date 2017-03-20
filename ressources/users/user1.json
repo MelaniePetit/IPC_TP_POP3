@@ -1,12 +1,41 @@
 {
   "messages":[
     {
-      "from": "a",
-      "to": "b",
-      "subject": "c",
-      "date": "d",
+      "from": "polytech@lyon1.fr",
+      "to": "insa@lyon1.fr",
+      "subject": "24h",
+      "date": "10/10/10",
       "marked": false,
       "message-id": 1,
-      "content": "azerty"
+      "content": "Bonjour"
+    },
+    {
+      "from": "polytech@lyon1.fr",
+      "to": "insa@lyon1.fr",
+      "subject": "PNW",
+      "date": "11/11/11",
+      "marked": false,
+      "message-id": 2,
+      "content": "Hello"
+    },
+    {
+      "from": "polytech@lyon1.fr",
+      "to": "insa@lyon1.fr",
+      "subject": "Tigresses",
+      "date": "12/12/12",
+      "marked": false,
+      "message-id": 3,
+      "content": "Hola"
+    },
+    {
+      "from": "polytech@lyon1.fr",
+      "to": "insa@lyon1.fr",
+      "subject": "WEC",
+      "date": "09/09/09",
+      "marked": false,
+      "message-id": 4,
+      "content": "Bonjurno"
     }
-  ],"number_messages":1}
+  ],
+  "number_messages":4
+}
