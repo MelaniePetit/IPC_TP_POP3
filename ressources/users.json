@@ -10,6 +10,26 @@
         "username" : "melanie",
         "password" : "012345678",
         "file" : "user2.json"
+      },
+      {
+        "username": "serena",
+        "password": "kelia15",
+        "file": "user3.json"
+      },
+      {
+        "username" : "vanessa",
+        "password" : "corresp75",
+        "file" : "user3.json"
+      },
+      {
+        "username" : "dan",
+        "password" : "booking",
+        "file" : "user4.json"
+      },
+      {
+        "username" : "chuck",
+        "password" : "moneydolars",
+        "file" : "user5.json"
       }
     ]
 }
