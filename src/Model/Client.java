@@ -37,44 +37,6 @@ public class Client {
     public Client() {
     }
 
-    //    public Client(String ip){
-//        int port = 110;
-//        ipAdress = ip;
-//        try {
-//            SocketFactory socketFactory = SSLSocketFactory.getDefault();
-//            SSLSocket sslSocket = (SSLSocket) socketFactory.createSocket(ip,port);
-//
-//            sslSocket.setEnabledCipherSuites();
-//            this.socket = socket;
-//            // Open stream
-//            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            output = new DataOutputStream(socket.getOutputStream());
-//            // Show the server response
-//            gettimeStamp();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        try {
-//            int port = 110;
-//            socket = new Socket("10.42.146.50", port);
-//            // Open stream
-//            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//            output = new DataOutputStream(socket.getOutputStream());
-//            // Show the server response
-//            readStream();
-//            sendRequest("APOP jeremy 123456789");
-//            sendRequest("STAT");
-//            sendRequest("LIST");
-//            sendRequestRetr("RETR 2");
-//            sendRequest("QUIT");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public void sendRequest(String data)
     {
         String command = data.split("\\s+")[0];

@@ -50,7 +50,7 @@ public class MethodsQUIT extends Methods {
             Object obj = parser.parse(new FileReader("ressources\\users\\" + server.getUserfile()));
             JSONObject jsonObject = (JSONObject) obj;
             nbMessages = Integer.parseInt(jsonObject.get("number_messages").toString());
-            
+
             JSONArray messages = (JSONArray) jsonObject.get("messages");
 
             for(Object message : messages)
@@ -73,7 +73,6 @@ public class MethodsQUIT extends Methods {
             Object obj = parser.parse(new FileReader("ressources\\users\\" + server.getUserfile()));
             JSONObject jsonObject = (JSONObject) obj;
             nbMessages = Integer.parseInt(jsonObject.get("number_messages").toString());
-
             JSONArray messages = (JSONArray) jsonObject.get("messages");
 
             for(Object message : messages)

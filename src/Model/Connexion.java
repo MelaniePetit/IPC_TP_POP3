@@ -18,7 +18,6 @@ public class Connexion implements Runnable {
     Socket clientSocket;
     private int nbOfChances = 3;
     private boolean close;
-    private ArrayList<Methods> methodsList = new ArrayList<>();
     private String userfile;
 
     //CONSTANT
@@ -31,6 +30,8 @@ public class Connexion implements Runnable {
     private String timeStamp;
 
     //CONSTRUCTOR
+
+    private ArrayList<Methods> methodsList = new ArrayList<>();
     private void setMethodsList(){
         methodsList.add(new MethodsAPOP(this,"APOP"));
         methodsList.add(new MethodsLIST(this,"LIST"));
@@ -117,7 +118,6 @@ public class Connexion implements Runnable {
             }
             if(close)
             {
-//                sendResponse("-ERR number of chances attempt");
                 clientSocket.close();
             }
         } catch (IOException e) {
